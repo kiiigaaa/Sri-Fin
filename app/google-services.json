@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "574243021306",
+    "project_id": "srifin2-874b0",
+    "storage_bucket": "srifin2-874b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574243021306:android:52d567712b197f3d080443",
+        "android_client_info": {
+          "package_name": "com.example.srifin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "574243021306-vet9ub4rnusdts4fvjg1mfjporueshr2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJN4tqNHfHwRSNoQIv_wKyFpyZ-YEavBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "574243021306-vet9ub4rnusdts4fvjg1mfjporueshr2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">SriFin</string>
+    <string name="edit_delete">Edit/Delete</string>
+    <string name="overtime_pay">Overtime Pay</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="bonuses">Bonuses</string>
+    <string name="rental_income">Rental Income</string>
+    <string name="invesment_income">Invesment Income</string>
+    <string name="commission">commission</string>
+    <string name="add_more">Add more</string>
+    <string name="back">Back</string>
+    <string name="category_added_successfully">Category added successfully</string>
+    <string name="ok">ok</string>
+    <string name="report_of_incomes">Report of Incomes</string>
+    <string name="main_income">Main Income</string>
+    <string name="additional_income">Additional Income</string>
+    <string name="other_income">Other Income</string>
+    <string name="type_the_new_category">Type the new category</string>
+    <string name="category_name">Category Name</string>
+    <string name="enter">Enter</string>
+    <string name="catogeries">Catogeries</string>
+    <string name="main_incomes">Main Incomes</string>
+    <string name="additinal_incomes">Additinal Incomes</string>
+    <string name="other">Other</string>
+</resources>
