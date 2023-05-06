@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#81BD83"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/etNwsTitle"
+        android:layout_width="393dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:hint=" News Title"
+        android:inputType="textPersonName"
+        android:textAlignment="textStart"
+        android:textAllCaps="false" />
+
+    <EditText
+        android:id="@+id/etNwsDes"
+        android:layout_width="390dp"
+        android:layout_height="235dp"
+        android:layout_marginTop="20dp"
+        android:background="#FDFDFD"
+        android:ems="10"
+        android:hint="  News Description"
+        android:textAlignment="inherit" />
+
+    <Button
+        android:id="@+id/btnUpdateData"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#18AA1E"
+        android:text="Update Data"
+        android:textColor="#FDFCFC" />
+
+
+</LinearLayout>
