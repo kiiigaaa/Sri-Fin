@@ -1,2 +1,0 @@
-# Sri-Fin
-MAD Project 
