@@ -1,47 +1,59 @@
 package com.example.newsfeed.Adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.newsfeed.Activities.NewsDetailActivity
 import com.example.newsfeed.Model.NewsModal
 import com.example.newsfeed.R
 
-class NewsAdapter (private var nwsList : ArrayList<NewsModal>) : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+interface OnItemClickListener {
+    fun onItemClick(position: Int)
+}
 
-    private lateinit var mListner: onItemClickListner
+class NewsAdapter(private var newsList: ArrayList<NewsModal>) : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
-    interface onItemClickListner{
-        fun onItemClick(position: Int)
-    }
+    private lateinit var listener: OnItemClickListener
 
-    fun setOnItemClickListener(clickListner: onItemClickListner){
-        mListner = clickListner
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-       val itemView = LayoutInflater.from(parent.context).inflate(R.layout.nws_list_items,parent,false)
-        return ViewHolder(itemView,mListner)
-
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.nws_list_items, parent, false)
+        return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentNws = nwsList[position]
-        holder.tvNwsName.text=currentNws.newstitle
+        val currentNews = newsList[position]
+        holder.bind(currentNews)
     }
 
-
-    override fun getItemCount(): Int{
-        return nwsList.size
+    override fun getItemCount(): Int {
+        return newsList.size
     }
-    class ViewHolder ( itemView: View,clickListner: onItemClickListner) :RecyclerView.ViewHolder(itemView){
 
-        val tvNwsName : TextView = itemView.findViewById(R.id.tvNwsName)
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        init {
-            itemView.setOnClickListener(){
-                clickListner.onItemClick(adapterPosition)
+        private val tvNewsName: TextView = itemView.findViewById(R.id.tvNwsName)
+
+        fun bind(currentNews: NewsModal) {
+            tvNewsName.text = currentNews.newstitle
+
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, NewsDetailActivity::class.java)
+                intent.putExtra("newsid", currentNews.newsId)
+                intent.putExtra("newsdescription", currentNews.newsdescript)
+                intent.putExtra("newstitle", currentNews.newstitle)
+                itemView.context.startActivity(intent)
+            }
+
+            itemView.setOnLongClickListener {
+                listener.onItemClick(adapterPosition)
+                true
             }
         }
     }

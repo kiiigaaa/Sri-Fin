@@ -9,17 +9,18 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvEmp"
-        android:layout_width="402dp"
-        android:layout_height="726dp"
+        android:layout_width="408dp"
+        android:layout_height="685dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="200dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
         android:background="#81BD83"
+        android:paddingTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchbtn"
+        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/news_list_items_user" />
 
     <TextView
@@ -50,6 +51,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.045" />
+        app:layout_constraintVertical_bias="0.023" />
+
+    <SearchView
+        android:id="@+id/searchbtn"
+        android:layout_width="374dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="8dp"
+        android:background="#FDFDFD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.092" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

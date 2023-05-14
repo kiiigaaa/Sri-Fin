@@ -176,10 +176,9 @@
         app:layout_constraintVertical_bias="0.619" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/newsIdView"
         android:layout_width="322dp"
         android:layout_height="45dp"
-        android:background="#29652B"
         android:text="News Details"
         android:textAlignment="center"
         android:textColor="#FFFFFF"

@@ -57,9 +57,10 @@ class NewsForm : AppCompatActivity() {
             .addOnCompleteListener{
                 Toast.makeText(this,"data insert successfully",Toast.LENGTH_LONG).show()
 
-                newsTitle.text.clear()
-                newsDes.text.clear()
-
+                if (newsTitle.text.isNotEmpty() && newsDes.text.isNotEmpty()) {
+                        newsTitle.text.clear()
+                        newsDes.text.clear()
+                    }
             }.addOnFailureListener{
                 Toast.makeText(this,"Error ",Toast.LENGTH_LONG).show()
 

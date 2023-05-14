@@ -6,25 +6,38 @@
     android:orientation="vertical"
     android:padding="10dp">
 
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="101dp"
+        android:layout_height="30dp"
+        android:text="Title"
+        android:textAlignment="gravity"
+        android:textSize="16sp" />
+
     <EditText
         android:id="@+id/etNwsTitle"
         android:layout_width="393dp"
         android:layout_height="76dp"
         android:layout_marginTop="20dp"
         android:background="#FFFFFF"
-        android:hint=" News Title"
         android:inputType="textPersonName"
         android:textAlignment="textStart"
         android:textAllCaps="false" />
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="116dp"
+        android:layout_height="47dp"
+        android:text="Description"
+        android:textSize="16sp" />
+
     <EditText
         android:id="@+id/etNwsDes"
-        android:layout_width="390dp"
-        android:layout_height="235dp"
+        android:layout_width="393dp"
+        android:layout_height="181dp"
         android:layout_marginTop="20dp"
         android:background="#FDFDFD"
         android:ems="10"
-        android:hint="  News Description"
         android:textAlignment="inherit" />
 
     <Button
@@ -33,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:background="#18AA1E"
+        android:background="@drawable/oval_button_background"
         android:text="Update Data"
         android:textColor="#FDFCFC" />
 

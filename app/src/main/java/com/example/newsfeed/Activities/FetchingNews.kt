@@ -14,10 +14,11 @@ import com.google.firebase.database.*
 
 class FetchingNews : AppCompatActivity() {
 
-    private lateinit var newsRecyclerView : RecyclerView
-    private lateinit var tvLoadingDat : TextView
-    private lateinit var nwsList:ArrayList<NewsModal>
+    private lateinit var newsRecyclerView: RecyclerView
+    private lateinit var tvLoadingData: TextView
+    private lateinit var nwsList: ArrayList<NewsModal>
     private lateinit var dbRef: DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fetching_news)
@@ -26,56 +27,39 @@ class FetchingNews : AppCompatActivity() {
         newsRecyclerView.layoutManager = LinearLayoutManager(this)
         newsRecyclerView.setHasFixedSize(true)
 
-        tvLoadingDat = findViewById(R.id.tvLoadingData)
+        tvLoadingData = findViewById(R.id.tvLoadingData)
 
-        nwsList= arrayListOf<NewsModal>()
+        nwsList = arrayListOf<NewsModal>()
         getNewsData()
-
-
     }
 
-    private fun getNewsData(){
-        newsRecyclerView.visibility=View.GONE
-        tvLoadingDat.visibility=View.VISIBLE
+    private fun getNewsData() {
+        newsRecyclerView.visibility = View.GONE
+        tvLoadingData.visibility = View.VISIBLE
 
-        dbRef=FirebaseDatabase.getInstance().getReference("News")
+        dbRef = FirebaseDatabase.getInstance().getReference("News")
 
-        dbRef.addValueEventListener(object :ValueEventListener{
+        dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-              nwsList.clear()
-                if(snapshot.exists()){
-                    for (nwsSnap in snapshot.children){
+                nwsList.clear()
+                if (snapshot.exists()) {
+                    for (nwsSnap in snapshot.children) {
                         val nwsData = nwsSnap.getValue(NewsModal::class.java)
                         nwsList.add(nwsData!!)
                     }
-                    val mAdapter=NewsAdapter(nwsList)
-                    newsRecyclerView.adapter=mAdapter
+                    val mAdapter = NewsAdapter(nwsList)
+                    newsRecyclerView.adapter = mAdapter
 
-                    mAdapter.setOnItemClickListener(object : NewsAdapter.onItemClickListner{
-                        override fun onItemClick(position: Int) {
-                            val intent= Intent(this@FetchingNews,NewsDetailActivity::class.java)
 
-                            intent.putExtra("nwsID",nwsList[position].titleId)
-                            intent.putExtra("nwsTitle",nwsList[position].newstitle)
-                            intent.putExtra("nwsDescription",nwsList[position].newsdescript)
-                            startActivity(intent)
 
-                        }
-
-                    })
-
-                    newsRecyclerView.visibility=View.VISIBLE
-                    tvLoadingDat.visibility=View.GONE
+                    newsRecyclerView.visibility = View.VISIBLE
+                    tvLoadingData.visibility = View.GONE
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                // Handle onCancelled event
             }
-
-
         })
     }
-
-
 }

@@ -1,5 +1,6 @@
 package com.example.newsfeed.Activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,120 +15,58 @@ import com.google.firebase.database.FirebaseDatabase
 
 class NewsDetailActivity : AppCompatActivity() {
 
-    private lateinit var tvNwsId:TextView
-    private lateinit var tvNwsTit:TextView
-    private lateinit var tvNwsDes:TextView
-    private lateinit var btnUpdate:Button
-    private lateinit var btnDelete:Button
+    private lateinit var database: FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_detail)
-        initView()
-        setValuesToViews()
+
+        database = FirebaseDatabase.getInstance()
+
+        val newsId = intent.getStringExtra("newsid")
+        val newstitle = intent.getStringExtra("newstitle")
+        val newsdescription = intent.getStringExtra("newsdescription")
+
+        val titleEditText = findViewById<EditText>(R.id.tvNwsTit)
+        val descriptionEditText = findViewById<EditText>(R.id.tvNwsDes)
+
+        titleEditText.setText(newstitle)
+        descriptionEditText.setText(newsdescription)
+
+        val docRef = newsId?.let { database.reference.child("News").child(it) }
+
+        val btnUpdate = findViewById<Button>(R.id.btnUpdate)
+        val btnDelete = findViewById<Button>(R.id.btnDelete)
+
+        btnDelete.setOnClickListener {
+            if (docRef != null) {
+                docRef.removeValue()
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "News deleted successfully", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error deleting news: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            }
+        }
 
         btnUpdate.setOnClickListener {
-            openUpdateDialog(
-                intent.getStringExtra("nwsId").toString() ,
-                intent.getStringExtra("nwsTitle").toString()
-            )
+            val updatedTitle = titleEditText.text.toString()
+            val updatedDescription = descriptionEditText.text.toString()
+
+            val updatedNews = NewsModal(newsId, updatedTitle, updatedDescription)
+
+            if (docRef != null) {
+                docRef.setValue(updatedNews)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "News updated successfully", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error updating news: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            }
         }
-        btnDelete.setOnClickListener {
-            deleteRecord(
-                intent.getStringExtra("nwsId").toString()
-            )
-         }
-    }
-    private fun deleteRecord(
-        id:String
-    ){
-        val dbRef=FirebaseDatabase.getInstance().getReference("News").child(id)
-        val mTask = dbRef.removeValue()
-
-        mTask.addOnSuccessListener {
-            Toast.makeText(this,"news data deleted",Toast.LENGTH_LONG).show()
-            val intent = Intent(this,FetchingNews::class.java)
-            finish()
-            startActivity(intent)
-        } .addOnFailureListener{error->
-
-            Toast.makeText(this,"Deleting Error ${error.message}",Toast.LENGTH_LONG).show()
-        }
-    }
-    private fun initView(){
-
-        tvNwsId = findViewById(R.id.tvNwsId)
-        tvNwsTit = findViewById(R.id.tvNwsTit)
-        tvNwsDes = findViewById(R.id.tvNwsDes)
-        btnUpdate = findViewById(R.id.btnUpdate)
-        btnDelete = findViewById(R.id.btnDelete)
-
-
-    }
-    private fun setValuesToViews(){
-        tvNwsId.text=intent.getStringExtra("nwsId")
-        tvNwsTit.text=intent.getStringExtra("nwsTitle")
-        tvNwsDes.text=intent.getStringExtra("nwsDescription")
-    }
-    private fun openUpdateDialog(
-
-        NwsId:String,
-        nwsName:String
-
-    ){
-
-        val mDialog = AlertDialog.Builder(this)
-        val inflater = layoutInflater
-        val mDialogView = inflater.inflate(R.layout.update_dialog,null)
-
-        mDialog.setView(mDialogView)
-
-        val etNwsTitle = mDialogView.findViewById<EditText>(R.id.etNwsTitle)
-        val etNwsDes = mDialogView.findViewById<EditText>(R.id.etNwsDes)
-        val btnUpdateData = mDialogView.findViewById<Button>(R.id.btnUpdateData)
-
-
-        etNwsTitle.setText( intent.getStringExtra("nwsTitle").toString())
-        etNwsDes.setText( intent.getStringExtra("nwsDescription").toString())
-
-        mDialog.setTitle("Updating $etNwsTitle Record")
-
-        val alertDialog=mDialog.create()
-        alertDialog.show()
-
-        btnUpdateData.setOnClickListener {
-            updateNwsData(
-                NwsId,
-                etNwsTitle.text.toString(),
-                etNwsDes.text.toString()
-
-
-            )
-            Toast.makeText(applicationContext,"News data updated",Toast.LENGTH_LONG).show()
-
-            //we are setting update data to our textviews
-
-            tvNwsTit.text=etNwsTitle.text.toString()
-            tvNwsDes.text=etNwsDes.text.toString()
-
-            alertDialog.dismiss()
-        }
-
-
-
-
-    }
-
-    private fun updateNwsData(
-        id:String,
-        title:String,
-        description:String
-        ){
-
-        val dbRef = FirebaseDatabase.getInstance().getReference("News").child(id)
-        val nwsInfo = NewsModal(id,title,description)
-        dbRef.setValue(nwsInfo)
     }
 }
-
-
