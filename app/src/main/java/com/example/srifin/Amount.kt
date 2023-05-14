@@ -25,6 +25,11 @@ class Amount : AppCompatActivity() {
         enterButton.setOnClickListener {
             val amount = amountEditText.text.toString()
 
+            if (amount.isEmpty()) {
+                amountEditText.error = "Amount cannot be empty"
+                return@setOnClickListener
+            }
+
             // Save the entered amount to Firebase database
             val database = FirebaseDatabase.getInstance()
             val amountRef = database.getReference("amounts").push()
