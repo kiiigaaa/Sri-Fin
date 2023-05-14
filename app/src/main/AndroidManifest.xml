@@ -11,10 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SriFin"
         tools:targetApi="31">
-
         <activity
-            android:name=".Control"
-            android:exported="true" />
+            android:name=".Update"
+            android:exported="false" />
         <activity
             android:name=".Report"
             android:exported="true" />
@@ -28,7 +27,10 @@
             android:name=".Amount"
             android:exported="true" />
         <activity
-            android:name=".update"
+            android:name=".Read"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Control"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
