@@ -32,6 +32,10 @@
          <activity
          android:name=".UserProfile"
          android:exported="false" />
+
+<!--        <activity-->
+<!--            android:name=".MainActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".SignUP"
             android:exported="false" /> <!-- <activity -->

@@ -119,6 +119,19 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
+        android:id="@+id/button5"
+        android:layout_width="283dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="36dp"
+        android:backgroundTint="#3DAE42"
+        android:text=" Give Feedback "
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.367"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
         android:id="@+id/updateb"
         android:layout_width="138dp"
         android:layout_height="64dp"

@@ -20,6 +20,7 @@ class UserProfile : AppCompatActivity() {
     private lateinit var viewbtn :Button
     private lateinit var updatebtn :Button
     private lateinit var deletebtn :Button
+    private lateinit var feedbckbtn :Button
 
 
     private lateinit var dbRef: DatabaseReference
@@ -37,6 +38,7 @@ class UserProfile : AppCompatActivity() {
         viewbtn =findViewById(R.id.viewb)
         updatebtn =findViewById(R.id.updateb)
         deletebtn =findViewById(R.id.deleteb)
+        feedbckbtn =findViewById(R.id.button5)
 
         viewbtn.setOnClickListener {
             val intent = Intent(this, Read::class.java)
@@ -48,6 +50,11 @@ class UserProfile : AppCompatActivity() {
         }
         deletebtn.setOnClickListener {
             val intent = Intent(this, Delete::class.java)
+            startActivity(intent)
+        }
+
+        feedbckbtn.setOnClickListener {
+            val intent = Intent(this, Feedback::class.java)
             startActivity(intent)
         }
 
@@ -66,20 +73,51 @@ class UserProfile : AppCompatActivity() {
         if (empName.isEmpty()) {
             username.error = "Please enter Username"
         }
+//        if (empEmail.isEmpty()) {
+//            email.error = "Please enter Email"
+//        }
+//        if (empPhoneNo.isEmpty()) {
+//            phone.error = "Please enter Phone Number"
+//        }
         if (empEmail.isEmpty()) {
             email.error = "Please enter Email"
+            return}
+        else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(empEmail).matches()) {
+            email.error = "Please enter a valid Email address"
+            return
         }
+
         if (empPhoneNo.isEmpty()) {
             phone.error = "Please enter Phone Number"
+            return
+        } else if (empPhoneNo.length != 10) {
+            phone.error = "Please enter a valid Phone Number with 10 digits"
+            return
+        } else if (!android.util.Patterns.PHONE.matcher(empPhoneNo).matches()) {
+            phone.error = "Please enter a valid Phone Number"
+            return
         }
+
         if (empJob.isEmpty()) {
             job.error = "Please enter Your Job"
         }
         val user= ProfileModel(empName , empEmail ,empPhoneNo ,empJob )
 
+        if (empName.isEmpty() || empEmail.isEmpty() || empPhoneNo.isEmpty() || empJob.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_LONG).show()
+            return
+        }
+
         dbRef.child(empName).setValue(user)
             .addOnCompleteListener{
+                // Clear all EditText fields
+                username.text.clear()
+                email.text.clear()
+                phone.text.clear()
+                job.text.clear()
+
                 Toast.makeText(this, "Data inserted successfully", Toast.LENGTH_LONG).show()
+
             }.addOnFailureListener { err ->
                 Toast.makeText(this, "Error ${err.message}", Toast.LENGTH_LONG).show()
             }

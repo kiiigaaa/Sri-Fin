@@ -11,8 +11,8 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName5"
-        android:layout_width="394dp"
-        android:layout_height="62dp"
+        android:layout_width="396dp"
+        android:layout_height="54dp"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textPersonName"
@@ -26,8 +26,8 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName6"
-        android:layout_width="394dp"
-        android:layout_height="62dp"
+        android:layout_width="396dp"
+        android:layout_height="54dp"
         android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="@string/password"
